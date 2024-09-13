@@ -24,7 +24,10 @@ class User {
 const teamMembers = [
   new User(1, "John Doe", "Admin", "123-456-7890", "john@example.com", "111-222-3333", true, ["Client A"], "Jane Smith", ["Task 1"], "hashed_password_1"),
   new User(2, "Jane Smith", "Member", "123-456-7891", "jane@example.com", "222-333-4444", true, ["Client B"], "John Doe", ["Task 2"], "hashed_password_2"),
+  new User(3, "Emily Clark", "Member", "123-456-7896", "emily@example.com", "777-888-9999", true, ["Client F"], "John Doe", ["Task 7"], "hashed_password_6"),
+  new User(4, "Michael Brown", "Manager", "123-456-7897", "michael@example.com", "888-999-0000", true, ["Client G"], "Jane Smith", ["Task 8", "Task 9"], "hashed_password_7"),
 ];
+
 
 const Members = () => {
   const [team, setTeam] = useState(teamMembers);
@@ -32,8 +35,22 @@ const Members = () => {
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
 
   const handleViewMore = (user) => {
-    alert(`Viewing more details for ${user.name}`);
+    alert(`User Details:
+      User ID: ${user.user_id}
+      Name: ${user.name}
+      Role: ${user.role}
+      Phone Number: ${user.phone_number}
+      Email ID: ${user.email_id}
+      Alternate Phone Number: ${user.alternate_pho_no}
+      Status: ${user.status ? "Active" : "Inactive"}
+      Clients: ${user.clients.join(", ")}
+      Reporting To: ${user.reporting_to}
+      Tasks: ${user.tasks.join(", ")}
+      Password: `);
   };
+  
+  
+  
 
   const handleUpdate = (user) => {
     setSelectedUser(user);
