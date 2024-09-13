@@ -1,9 +1,39 @@
-.header {
+/* .header {
     background-color: #59358a;
     color: white;
     text-align: center;
     padding: 10px;
     font-size: 18px;
     font-weight: bold;
+  }
+   */
+
+  .header {
+     background-color: #59358a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  
+  .header h1 {
+    margin: 0;
+    color: white;
+  }
+  
+  .header-icons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .icon {
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .icon:hover {
+    color: white;
   }
   

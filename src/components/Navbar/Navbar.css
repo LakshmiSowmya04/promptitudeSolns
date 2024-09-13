@@ -13,7 +13,7 @@
 }
 
 .heading {
-  font-weight: bolder;
+  /* font-weight: bolder; */
   font-size: 18px; 
   padding: 10px 15px;
   cursor: pointer;
@@ -28,7 +28,7 @@
 }
 
 .heading:hover {
-  background-color: #59358a;
+  background-color: #e2e6ea;
 }
 
 
@@ -55,12 +55,12 @@
 
 
 .subheading:hover {
-  background-color: #f0f0f0; 
+  background-color: #59358a; 
   transition: background-color 0.2s ease-in;
 }
 
 .subheading a:hover {
-  color: #59358a; 
+  color: white; 
 }
 
 
