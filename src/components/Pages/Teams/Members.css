@@ -1,6 +1,15 @@
+/* .members-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+} */
+
 .members-container {
   font-family: Arial, sans-serif;
   padding: 20px;
+  background-color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px;
+  box-sizing: border-box; 
 }
 
 h1 {
