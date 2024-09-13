@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import './Members.css';
 
@@ -28,11 +26,14 @@ const teamMembers = [
   new User(4, "Michael Brown", "Manager", "123-456-7897", "michael@example.com", "888-999-0000", true, ["Client G"], "Jane Smith", ["Task 8", "Task 9"], "hashed_password_7"),
 ];
 
-
 const Members = () => {
   const [team, setTeam] = useState(teamMembers);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleViewMore = (user) => {
     alert(`User Details:
@@ -46,11 +47,8 @@ const Members = () => {
       Clients: ${user.clients.join(", ")}
       Reporting To: ${user.reporting_to}
       Tasks: ${user.tasks.join(", ")}
-     Password: `);
+      Password: ${user.password}`);
   };
-
-
-
 
   const handleUpdate = (user) => {
     setSelectedUser(user);
@@ -58,7 +56,8 @@ const Members = () => {
   };
 
   const handlePasswordChange = (user) => {
-    alert(`Password change for ${user.name}`);
+    setSelectedUser(user);
+    setPasswordModalOpen(true);
   };
 
   const handleToggleStatus = (user) => {
@@ -70,6 +69,24 @@ const Members = () => {
     const updatedTeam = team.map((u) => (u.user_id === updatedUser.user_id ? updatedUser : u));
     setTeam(updatedTeam);
     setUpdateModalOpen(false);
+  };
+
+  const handleChangePassword = () => {
+    if (!newPassword || !confirmPassword) {
+      setError('Password fields cannot be blank.');
+      return;
+    }
+    if (newPassword === confirmPassword) {
+      const updatedTeam = team.map((u) =>
+        u.user_id === selectedUser.user_id ? { ...u, password: newPassword } : u
+      );
+      setTeam(updatedTeam);
+      setPasswordModalOpen(false);
+      setError('');
+      alert('Password updated successfully!');
+    } else {
+      setError('Passwords do not match.');
+    }
   };
 
   return (
@@ -144,9 +161,35 @@ const Members = () => {
           </form>
         </div>
       )}
+
+      {isPasswordModalOpen && (
+        <div className="modal">
+          <h2>Change Password</h2>
+          <form onSubmit={(e) => { e.preventDefault(); handleChangePassword(); }}>
+            <label>New Password: </label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <br></br>
+            <label>Confirm Password: </label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <br></br>
+            {error && <p className="error-message">{error}</p>}
+            <div className="button-container">
+              <button className='update-btn' type="submit">Change Password</button>
+              <button className='close-btn' type="button" onClick={() => setPasswordModalOpen(false)}>Close</button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Members;
-
