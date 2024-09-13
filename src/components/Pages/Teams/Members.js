@@ -46,11 +46,11 @@ const Members = () => {
       Clients: ${user.clients.join(", ")}
       Reporting To: ${user.reporting_to}
       Tasks: ${user.tasks.join(", ")}
-      Password: `);
+     Password: `);
   };
-  
-  
-  
+
+
+
 
   const handleUpdate = (user) => {
     setSelectedUser(user);
@@ -120,6 +120,7 @@ const Members = () => {
               value={selectedUser.name}
               onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
             />
+            <br></br>
             <label>Role: </label>
             <input
               type="text"
@@ -127,15 +128,19 @@ const Members = () => {
               value={selectedUser.role}
               onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
             />
-            <label>Clients: </label>
+            <br></br>
+            <label>Reporting To: </label>
             <input
               type="text"
-              name="clients"
-              value={selectedUser.clients.join(', ')}
-              onChange={(e) => setSelectedUser({ ...selectedUser, clients: e.target.value.split(', ') })}
+              name="reporting_to"
+              value={selectedUser.reporting_to}
+              onChange={(e) => setSelectedUser({ ...selectedUser, reporting_to: e.target.value })}
             />
-            <button type="submit">Update</button>
-            <button type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
+            <br></br>
+            <div className="button-container">
+              <button className='update-btn' type="submit">Update</button>
+              <button className='close-btn' type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
+            </div>
           </form>
         </div>
       )}

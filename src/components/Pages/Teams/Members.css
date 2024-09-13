@@ -1,6 +1,4 @@
-
-   
-   .members-container {
+.members-container {
   font-family: Arial, sans-serif;
   padding: 20px;
 }
@@ -26,6 +24,7 @@ button {
   padding: 5px 10px;
 }
 
+/* Modal Styles */
 .modal {
   position: fixed;
   top: 50%;
@@ -35,6 +34,10 @@ button {
   padding: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  width: 70%; /* Adjusted width */
+  max-width: 800px; /* Optional: set a max-width to avoid it becoming too wide on large screens */
+  border: 2px solid #4CAF50; /* Optional: add a border for better visibility */
+  border-radius: 8px; /* Optional: add rounded corners */
 }
 
 .modal h2 {
@@ -56,4 +59,34 @@ button {
 
 .modal button {
   margin-top: 10px;
+  padding: 10px 20px; /* Increase padding for better appearance */
+  max-width: 150px; /* Limit the maximum width of the button */
+  align-self: flex-start; /* Align buttons to the start */
+}
+
+/* Specific Styles for Update and Close Buttons */
+.modal .update-btn, .modal .close-btn {
+  margin-top: 10px;
+  padding: 10px 20px; /* Consistent padding for buttons */
+  max-width: 150px; /* Limit the maximum width of the buttons */
+}
+
+.modal .update-btn {
+  background-color: #4CAF50; /* Green background for update button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal .close-btn {
+  background-color: #f44336; /* Red background for close button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal .update-btn:hover, .modal .close-btn:hover {
+  opacity: 0.8; /* Slightly reduce opacity on hover */
 }
