@@ -1,49 +1,76 @@
 .navbar {
-    width: 20%;
-    background-color: #f8f9fa;
-    padding: 10px;
+  width: 20%;
+  background-color: #f8f9fa;
+  padding: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.heading {
+  font-weight: bolder;
+  font-size: 18px; 
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.heading a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: block;
+}
+
+.heading:hover {
+  background-color: #59358a;
+}
+
+
+.dropdown {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+
+.subheading {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between; 
+}
+
+.subheading a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%;
+}
+
+
+.subheading:hover {
+  background-color: #f0f0f0; 
+  transition: background-color 0.2s ease-in;
+}
+
+.subheading a:hover {
+  color: #59358a; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: auto;
   }
-  
-  .navbar h2 {
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .navbar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .navbar ul li {
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .navbar ul li a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  .navbar ul li:hover {
-    background-color: #e2e6ea;
-  }
-  
+
   .dropdown {
-    list-style-type: none;
-    padding-left: 20px;
+    padding-left: 10px;
   }
-  
-  .dropdown li {
-    padding: 5px;
-    cursor: pointer;
-  }
-  
-  .dropdown li a {
-    color: green;
-  }
-  
-  .dropdown li:hover {
-    background-color: #f0f0f0;
-  }
-  
+}

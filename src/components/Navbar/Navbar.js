@@ -30,50 +30,57 @@ function Navbar() {
   return (
     <div className="navbar">
       <ul>
-        <li><Link to="/">Dashboard</Link></li>
-        
-        <li onClick={() => toggleDropdown('tasks')}>
+        {/* Dashboard Link */}
+        <li className="heading"><Link to="/">Dashboard</Link></li>
+
+        {/* Tasks Section */}
+        <li className="heading" onClick={() => toggleDropdown('tasks')}>
           Tasks {isTasksOpen ? '▲' : '▼'}
           {isTasksOpen && (
             <ul className="dropdown">
-              <li><Link to="/tasks/today">Today</Link></li>
-              <li><Link to="/tasks/assigned">Assigned to Me</Link></li>
-              <li><Link to="/tasks/reported">Reported by Me</Link></li>
-              <li><Link to="/tasks/all">All Tasks</Link></li>
+              <li className="subheading"><Link to="/tasks/today">Today</Link></li>
+              <li className="subheading"><Link to="/tasks/assigned">Assigned to Me</Link></li>
+              <li className="subheading"><Link to="/tasks/reported">Reported by Me</Link></li>
+              <li className="subheading"><Link to="/tasks/all">All Tasks</Link></li>
             </ul>
           )}
         </li>
-        
-        <li><Link to="/clients">Clients</Link></li>
-        
-        <li onClick={() => toggleDropdown('vaults')}>
+
+        {/* Clients Link */}
+        <li className="heading"><Link to="/clients">Clients</Link></li>
+
+        {/* Vaults Section */}
+        <li className="heading" onClick={() => toggleDropdown('vaults')}>
           Vaults {isVaultsOpen ? '▲' : '▼'}
           {isVaultsOpen && (
             <ul className="dropdown">
-              <li><Link to="/vaults/password">Password</Link></li>
-              <li><Link to="/vaults/docs">Docs</Link></li>
+              <li className="subheading"><Link to="/vaults/password">Password</Link></li>
+              <li className="subheading"><Link to="/vaults/docs">Docs</Link></li>
             </ul>
           )}
         </li>
-        
-        <li><Link to="/reminder">Reminder</Link></li>
 
-        <li onClick={() => toggleDropdown('myAccount')}>
+        {/* Reminder Link */}
+        <li className="heading"><Link to="/reminder">Reminder</Link></li>
+
+        {/* My Account Section */}
+        <li className="heading" onClick={() => toggleDropdown('myAccount')}>
           My Account {isMyAccountOpen ? '▲' : '▼'}
           {isMyAccountOpen && (
             <ul className="dropdown">
-              <li><Link to="/my-account/notifications">Notifications</Link></li>
-              <li><Link to="/my-account/leaves">Leaves</Link></li>
+              <li className="subheading"><Link to="/my-account/notifications">Notifications</Link></li>
+              <li className="subheading"><Link to="/my-account/leaves">Leaves</Link></li>
             </ul>
           )}
         </li>
 
-        <li onClick={() => toggleDropdown('myTeams')}>
+        {/* My Teams Section */}
+        <li className="heading" onClick={() => toggleDropdown('myTeams')}>
           My Teams {isMyTeamsOpen ? '▲' : '▼'}
           {isMyTeamsOpen && (
             <ul className="dropdown">
-              <li><Link to="/my-teams/members">Members</Link></li>
-              <li><Link to="/my-teams/leaves">Leaves</Link></li>
+              <li className="subheading"><Link to="/my-teams/members">Members</Link></li>
+              <li className="subheading"><Link to="/my-teams/leaves">Leaves</Link></li>
             </ul>
           )}
         </li>
