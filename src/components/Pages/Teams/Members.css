@@ -7,24 +7,28 @@
   box-sizing: border-box; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
 }
 
 h1 {
   text-align: center;
 }
 
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+.team-table {
+  margin: 0 auto;
+  border-collapse: collapse; 
+  width: 100%; 
 }
 
-th, td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
+
+.team-table th,
+.team-table td {
+  border: 1px solid #ddd; 
+  padding: 8px; 
+}
+
+.team-table th {
+  background-color: #f4f4f4; 
+  text-align: left; 
 }
 
 button {
