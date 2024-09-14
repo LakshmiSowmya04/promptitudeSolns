@@ -5,11 +5,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   border-radius: 8px;
   box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
 }
 
 h1 {
   text-align: center;
 }
+
 
 .table {
   width: 100%;
@@ -139,13 +143,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between; /* Ensures space between elements */
-  margin-bottom: 10px; /* Space below the container */
+  margin-bottom: 10px; 
 }
 
 .search-bar-container input {
-  width: 200px; /* Adjust width as needed */
+  width: 200px; 
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin-right: 10px; /* Space between search bar and button */
+  margin-right: 10px; 
 }
