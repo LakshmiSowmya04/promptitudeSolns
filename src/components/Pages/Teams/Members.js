@@ -31,8 +31,19 @@ const Members = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
+  const [isAddModalOpen, setAddModalOpen] = useState(false); // State for Add Modal
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [newUser, setNewUser] = useState({
+    name: '',
+    role: '',
+    phone_number: '',
+    email_id: '',
+    alternate_pho_no: '',
+    reporting_to: '',
+    tasks: [],
+    clients: [],
+  });
   const [error, setError] = useState('');
 
   const handleViewMore = (user) => {
@@ -89,13 +100,35 @@ const Members = () => {
     }
   };
 
+  const handleAddMember = () => {
+    const memberData = {
+      ...newUser,
+      user_id: team.length + 1, // Incremental ID
+      status: true, // Default to active
+      password: 'default_password', // Placeholder password
+    };
+    setTeam([...team, memberData]);
+    setAddModalOpen(false);
+    setNewUser({
+      name: '',
+      role: '',
+      email_id: '',
+      reporting_to: '',
+    });
+  };
+
+  const handleAddButtonClick = () => {
+    setAddModalOpen(true);
+  };
+
   return (
     <div className="members-container">
       <h1>Team Members</h1>
+      <button className="add-member-btn" onClick={handleAddButtonClick}>Add Member</button>
       <table className="team-table">
         <thead>
           <tr>
-            <th>Full Name</th>
+            <th>First Name</th>
             <th>Role</th>
             <th>Status</th>
             <th>Clients</th>
@@ -155,8 +188,8 @@ const Members = () => {
             />
             <br></br>
             <div className="button-container">
-              <button className='update-btn' type="submit">Update</button>
-              <button className='close-btn' type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
+              <button className="update-btn" type="submit">Update</button>
+              <button className="close-btn" type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
             </div>
           </form>
         </div>
@@ -179,11 +212,57 @@ const Members = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <br></br>
             {error && <p className="error-message">{error}</p>}
             <div className="button-container">
-              <button className='update-btn' type="submit">Change Password</button>
-              <button className='close-btn' type="button" onClick={() => setPasswordModalOpen(false)}>Close</button>
+              <button className="change-btn" type="submit">Change Password</button>
+              <button className="close-btn" type="button" onClick={() => setPasswordModalOpen(false)}>Close</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {isAddModalOpen && (
+        <div className="modal">
+          <h2>Add New Member</h2>
+          <form onSubmit={(e) => { e.preventDefault(); handleAddMember(); }}>
+            <label>Name: </label>
+            <input
+              type="text"
+              name="name"
+              value={newUser.name}
+              onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+              required
+            />
+            <br></br>
+            <label>Role: </label>
+            <input
+              type="text"
+              name="role"
+              value={newUser.role}
+              onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+              required
+            />
+            <br></br>
+            <label>Email ID: </label>
+            <input
+              type="email"
+              name="email_id"
+              value={newUser.email_id}
+              onChange={(e) => setNewUser({ ...newUser, email_id: e.target.value })}
+              required
+            />
+            <br></br>
+            <label>Reporting To: </label>
+            <input
+              type="text"
+              name="reporting_to"
+              value={newUser.reporting_to}
+              onChange={(e) => setNewUser({ ...newUser, reporting_to: e.target.value })}
+            />
+            <br></br>
+            <div className="button-container">
+              <button className="add-btn" type="submit">Add Member</button>
+              <button className="close-btn" type="button" onClick={() => setAddModalOpen(false)}>Close</button>
             </div>
           </form>
         </div>
