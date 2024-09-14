@@ -31,7 +31,7 @@ function Navbar() {
     <div className="navbar">
       <ul>
         {/* Dashboard Link */}
-        <li className="heading"><Link to="/">Dashboard</Link></li>
+        <li className="dashboard"><Link to="/">Dashboard</Link></li>
 
         {/* Tasks Section */}
         <li className="heading"  onClick={() => toggleDropdown('tasks')}>
