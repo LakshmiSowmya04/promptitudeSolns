@@ -95,7 +95,7 @@ const Members = () => {
       <table className="team-table">
         <thead>
           <tr>
-            <th>First Name</th>
+            <th>Full Name</th>
             <th>Role</th>
             <th>Status</th>
             <th>Clients</th>

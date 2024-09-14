@@ -34,7 +34,7 @@ function Navbar() {
         <li className="heading"><Link to="/">Dashboard</Link></li>
 
         {/* Tasks Section */}
-        <li className="heading" onClick={() => toggleDropdown('tasks')}>
+        <li className="heading"  onClick={() => toggleDropdown('tasks')}>
           Tasks {isTasksOpen ? '▲' : '▼'}
           {isTasksOpen && (
             <ul className="dropdown">
