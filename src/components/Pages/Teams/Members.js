@@ -45,6 +45,7 @@ const Members = () => {
     clients: [],
   });
   const [error, setError] = useState('');
+  const [openDropdown, setOpenDropdown] = useState(null); // State for kebab menu
 
   const handleViewMore = (user) => {
     alert(`User Details:
@@ -121,6 +122,10 @@ const Members = () => {
     setAddModalOpen(true);
   };
 
+  const toggleDropdown = (index) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+  };
+
   return (
     <div className="members-container">
       <h1>Team Members</h1>
@@ -147,12 +152,19 @@ const Members = () => {
               <td>{member.tasks.join(', ')}</td>
               <td>{member.reporting_to}</td>
               <td>
-                <button onClick={() => handleViewMore(member)}>View More</button>
-                <button onClick={() => handleUpdate(member)}>Update</button>
-                <button onClick={() => handlePasswordChange(member)}>Change Password</button>
-                <button onClick={() => handleToggleStatus(member)}>
-                  {member.status ? 'Disable' : 'Enable'}
-                </button>
+                <div className="dropdown">
+                  <button className="kebab-menu" onClick={() => toggleDropdown(index)}>⋮</button>
+                  {openDropdown === index && (
+                    <ul className="dropdown-menu">
+                      <li onClick={() => handleViewMore(member)}>View More</li>
+                      <li onClick={() => handleUpdate(member)}>Update</li>
+                      <li onClick={() => handlePasswordChange(member)}>Change Password</li>
+                      <li onClick={() => handleToggleStatus(member)}>
+                        {member.status ? 'Disable' : 'Enable'}
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </td>
             </tr>
           ))}
