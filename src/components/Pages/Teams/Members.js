@@ -28,12 +28,8 @@ const teamMembers = [
 
 const Members = () => {
   const [team, setTeam] = useState(teamMembers);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
-  const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
-  const [isAddModalOpen, setAddModalOpen] = useState(false); // State for Add Modal
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isAddModalOpen, setAddModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: '',
     role: '',
@@ -44,61 +40,13 @@ const Members = () => {
     tasks: [],
     clients: [],
   });
-  const [error, setError] = useState('');
-  const [openDropdown, setOpenDropdown] = useState(null); // State for kebab menu
 
-  const handleViewMore = (user) => {
-    alert(`User Details:
-      User ID: ${user.user_id}
-      Name: ${user.name}
-      Role: ${user.role}
-      Phone Number: ${user.phone_number}
-      Email ID: ${user.email_id}
-      Alternate Phone Number: ${user.alternate_pho_no}
-      Status: ${user.status ? "Active" : "Inactive"}
-      Clients: ${user.clients.join(", ")}
-      Reporting To: ${user.reporting_to}
-      Tasks: ${user.tasks.join(", ")}
-      Password: ${user.password}`);
+  const handleAddButtonClick = () => {
+    setAddModalOpen(true);
   };
 
-  const handleUpdate = (user) => {
-    setSelectedUser(user);
-    setUpdateModalOpen(true);
-  };
-
-  const handlePasswordChange = (user) => {
-    setSelectedUser(user);
-    setPasswordModalOpen(true);
-  };
-
-  const handleToggleStatus = (user) => {
-    const updatedTeam = team.map((u) => (u.user_id === user.user_id ? { ...u, status: !u.status } : u));
-    setTeam(updatedTeam);
-  };
-
-  const handleUpdateUser = (updatedUser) => {
-    const updatedTeam = team.map((u) => (u.user_id === updatedUser.user_id ? updatedUser : u));
-    setTeam(updatedTeam);
-    setUpdateModalOpen(false);
-  };
-
-  const handleChangePassword = () => {
-    if (!newPassword || !confirmPassword) {
-      setError('Password fields cannot be blank.');
-      return;
-    }
-    if (newPassword === confirmPassword) {
-      const updatedTeam = team.map((u) =>
-        u.user_id === selectedUser.user_id ? { ...u, password: newPassword } : u
-      );
-      setTeam(updatedTeam);
-      setPasswordModalOpen(false);
-      setError('');
-      alert('Password updated successfully!');
-    } else {
-      setError('Passwords do not match.');
-    }
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   const handleAddMember = () => {
@@ -118,32 +66,39 @@ const Members = () => {
     });
   };
 
-  const handleAddButtonClick = () => {
-    setAddModalOpen(true);
-  };
-
-  const toggleDropdown = (index) => {
-    setOpenDropdown(openDropdown === index ? null : index);
-  };
+  // Filtered team based on search term
+  const filteredTeam = team.filter(
+    (member) =>
+      member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      member.role.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="members-container">
       <h1>Team Members</h1>
-      <button className="add-member-btn" onClick={handleAddButtonClick}>Add Member</button>
+      <div className="members-header">
+        <button className="add-member-btn" onClick={handleAddButtonClick}>Add Member</button>
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search members..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
       <table className="team-table">
         <thead>
           <tr>
-            <th>First Name</th>
+            <th>Name</th>
             <th>Role</th>
             <th>Status</th>
             <th>Clients</th>
             <th>Tasks</th>
             <th>Reporting To</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {team.map((member, index) => (
+          {filteredTeam.map((member, index) => (
             <tr key={index}>
               <td>{member.name}</td>
               <td>{member.role}</td>
@@ -151,87 +106,10 @@ const Members = () => {
               <td>{member.clients.join(', ')}</td>
               <td>{member.tasks.join(', ')}</td>
               <td>{member.reporting_to}</td>
-              <td>
-                <div className="dropdown">
-                  <button className="kebab-menu" onClick={() => toggleDropdown(index)}>⋮</button>
-                  {openDropdown === index && (
-                    <ul className="dropdown-menu">
-                      <li onClick={() => handleViewMore(member)}>View More</li>
-                      <li onClick={() => handleUpdate(member)}>Update</li>
-                      <li onClick={() => handlePasswordChange(member)}>Change Password</li>
-                      <li onClick={() => handleToggleStatus(member)}>
-                        {member.status ? 'Disable' : 'Enable'}
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      {isUpdateModalOpen && (
-        <div className="modal">
-          <h2>Update User</h2>
-          <form onSubmit={(e) => { e.preventDefault(); handleUpdateUser(selectedUser); }}>
-            <label>Name: </label>
-            <input
-              type="text"
-              name="name"
-              value={selectedUser.name}
-              onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
-            />
-            <br></br>
-            <label>Role: </label>
-            <input
-              type="text"
-              name="role"
-              value={selectedUser.role}
-              onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
-            />
-            <br></br>
-            <label>Reporting To: </label>
-            <input
-              type="text"
-              name="reporting_to"
-              value={selectedUser.reporting_to}
-              onChange={(e) => setSelectedUser({ ...selectedUser, reporting_to: e.target.value })}
-            />
-            <br></br>
-            <div className="button-container">
-              <button className="update-btn" type="submit">Update</button>
-              <button className="close-btn" type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
-            </div>
-          </form>
-        </div>
-      )}
-
-      {isPasswordModalOpen && (
-        <div className="modal">
-          <h2>Change Password</h2>
-          <form onSubmit={(e) => { e.preventDefault(); handleChangePassword(); }}>
-            <label>New Password: </label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <br></br>
-            <label>Confirm Password: </label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            {error && <p className="error-message">{error}</p>}
-            <div className="button-container">
-              <button className="change-btn" type="submit">Change Password</button>
-              <button className="close-btn" type="button" onClick={() => setPasswordModalOpen(false)}>Close</button>
-            </div>
-          </form>
-        </div>
-      )}
 
       {isAddModalOpen && (
         <div className="modal">
@@ -245,7 +123,6 @@ const Members = () => {
               onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
               required
             />
-            <br></br>
             <label>Role: </label>
             <input
               type="text"
@@ -254,7 +131,6 @@ const Members = () => {
               onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
               required
             />
-            <br></br>
             <label>Email ID: </label>
             <input
               type="email"
@@ -263,7 +139,6 @@ const Members = () => {
               onChange={(e) => setNewUser({ ...newUser, email_id: e.target.value })}
               required
             />
-            <br></br>
             <label>Reporting To: </label>
             <input
               type="text"
@@ -272,7 +147,6 @@ const Members = () => {
               onChange={(e) => setNewUser({ ...newUser, reporting_to: e.target.value })}
             />
             <br></br>
-            
             <div className="button-container">
               <button className="add-btn" type="submit">Add Member</button>
               <button className="close-btn" type="button" onClick={() => setAddModalOpen(false)}>Close</button>
