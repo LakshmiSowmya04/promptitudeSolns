@@ -7,19 +7,54 @@
   box-sizing: border-box; 
 }
 
+
 h1 {
   text-align: center;
 }
 
+<<<<<<< HEAD
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+=======
+.members-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin-bottom: 20px;
 }
 
-th, td {
+.add-member-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-bar {
   padding: 10px;
+  width: 200px;
   border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.team-table {
+  margin: 0 auto; 
+  border-collapse: collapse; 
+  width: 80%; 
+>>>>>>> fa7b07dba1baeb5c4a136c3f4540b648f8a431cf
+}
+
+.team-table th,
+.team-table td {
+  border: 1px solid #ddd; 
+  padding: 8px; 
+}
+.team-table th{
+background-color: #f4f4f4; 
   text-align: left;
 }
 
