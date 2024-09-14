@@ -272,6 +272,7 @@ const Members = () => {
               onChange={(e) => setNewUser({ ...newUser, reporting_to: e.target.value })}
             />
             <br></br>
+            
             <div className="button-container">
               <button className="add-btn" type="submit">Add Member</button>
               <button className="close-btn" type="button" onClick={() => setAddModalOpen(false)}>Close</button>
