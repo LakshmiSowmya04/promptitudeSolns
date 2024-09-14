@@ -15,39 +15,11 @@ h1 {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-<<<<<<< HEAD
-=======
-}
-.members-header {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row-reverse;
-  margin-bottom: 20px;
->>>>>>> a047c49e0ae03863df3c45890e1d2b0886b5a439
 }
 
 th, td {
   padding: 10px;
   border: 1px solid #ddd;
-<<<<<<< HEAD
-=======
-  border-radius: 5px;
-}
-
-.team-table {
-  margin: 0 auto; 
-  border-collapse: collapse; 
-  width: 80%; 
-}
-
-.team-table th,
-.team-table td {
-  border: 1px solid #ddd; 
-  padding: 8px; 
-}
-.team-table th{
-background-color: #f4f4f4; 
->>>>>>> a047c49e0ae03863df3c45890e1d2b0886b5a439
   text-align: left;
 }
 
@@ -162,4 +134,18 @@ button {
 .add-member-btn:hover {
   background-color: #301555; 
   transform: scale(1.05); 
+}
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures space between elements */
+  margin-bottom: 10px; /* Space below the container */
+}
+
+.search-bar-container input {
+  width: 200px; /* Adjust width as needed */
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px; /* Space between search bar and button */
 }

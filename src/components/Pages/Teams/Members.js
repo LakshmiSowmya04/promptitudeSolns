@@ -46,6 +46,13 @@ const Members = () => {
   });
   const [error, setError] = useState('');
   const [openDropdown, setOpenDropdown] = useState(null); // State for kebab menu
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+
+  // Filtered team members based on search term
+  const filteredTeam = team.filter(member =>
+    member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    member.role.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleViewMore = (user) => {
     alert(`User Details:
@@ -129,7 +136,17 @@ const Members = () => {
   return (
     <div className="members-container">
       <h1>Team Members</h1>
+
+      {/* Search Bar */}
+      <div className="search-bar-container">
+        <input
+          type="text"
+          placeholder="Search by name or role..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       <button className="add-member-btn" onClick={handleAddButtonClick}>Add Member</button>
+      </div>
       <table className="team-table">
         <thead>
           <tr>
@@ -143,7 +160,7 @@ const Members = () => {
           </tr>
         </thead>
         <tbody>
-          {team.map((member, index) => (
+          {filteredTeam.map((member, index) => (
             <tr key={index}>
               <td>{member.name}</td>
               <td>{member.role}</td>
@@ -182,7 +199,7 @@ const Members = () => {
               value={selectedUser.name}
               onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
             />
-            <br></br>
+            <br />
             <label>Role: </label>
             <input
               type="text"
@@ -190,7 +207,7 @@ const Members = () => {
               value={selectedUser.role}
               onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
             />
-            <br></br>
+            <br />
             <label>Reporting To: </label>
             <input
               type="text"
@@ -198,7 +215,7 @@ const Members = () => {
               value={selectedUser.reporting_to}
               onChange={(e) => setSelectedUser({ ...selectedUser, reporting_to: e.target.value })}
             />
-            <br></br>
+            <br />
             <div className="button-container">
               <button className="update-btn" type="submit">Update</button>
               <button className="close-btn" type="button" onClick={() => setUpdateModalOpen(false)}>Close</button>
@@ -217,16 +234,17 @@ const Members = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            <br></br>
+            <br />
             <label>Confirm Password: </label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {error && <p className="error-message">{error}</p>}
+            <br />
+            {error && <p className="error">{error}</p>}
             <div className="button-container">
-              <button className="change-btn" type="submit">Change Password</button>
+              <button className="update-btn" type="submit">Change Password</button>
               <button className="close-btn" type="button" onClick={() => setPasswordModalOpen(false)}>Close</button>
             </div>
           </form>
@@ -240,40 +258,33 @@ const Members = () => {
             <label>Name: </label>
             <input
               type="text"
-              name="name"
               value={newUser.name}
               onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-              required
             />
-            <br></br>
+            <br />
             <label>Role: </label>
             <input
               type="text"
-              name="role"
               value={newUser.role}
               onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-              required
             />
-            <br></br>
+            <br />
             <label>Email ID: </label>
             <input
               type="email"
-              name="email_id"
               value={newUser.email_id}
               onChange={(e) => setNewUser({ ...newUser, email_id: e.target.value })}
-              required
             />
-            <br></br>
+            <br />
             <label>Reporting To: </label>
             <input
               type="text"
-              name="reporting_to"
               value={newUser.reporting_to}
               onChange={(e) => setNewUser({ ...newUser, reporting_to: e.target.value })}
             />
-            <br></br>
+            <br />
             <div className="button-container">
-              <button className="add-btn" type="submit">Add Member</button>
+              <button className="update-btn" type="submit">Add Member</button>
               <button className="close-btn" type="button" onClick={() => setAddModalOpen(false)}>Close</button>
             </div>
           </form>
