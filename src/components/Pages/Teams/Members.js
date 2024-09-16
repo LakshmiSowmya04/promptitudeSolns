@@ -160,8 +160,6 @@ const Members = () => {
       status: true,
       password: newUser.password || "default_password", // Provide defaul
     };
-<<<<<<< HEAD
-
     axios
       .post("http://localhost:5000/users", memberData)
       .then((response) => {
@@ -182,18 +180,16 @@ const Members = () => {
         console.log(error);
         console.error("Error adding new member:", error);
       });
-=======
     setTeam([...team, memberData]);
     setAddModalOpen(false);
     setNewUser({
-      name: '',
-      role: '',
-      phone_number: '',
-      email_id: '',
-      alternate_pho_no: '',
-      reporting_to: '',
+      name: "",
+      role: "",
+      phone_number: "",
+      email_id: "",
+      alternate_pho_no: "",
+      reporting_to: "",
     });
->>>>>>> 897839dbb2221a5e52a1a4e86a3597a96110c60f
   };
 
   const handleAddButtonClick = () => {
@@ -436,14 +432,18 @@ const Members = () => {
             <input
               type="text"
               value={newUser.phone_number}
-              onChange={(e) => setNewUser({ ...newUser, phone_number: e.target.value })}
+              onChange={(e) =>
+                setNewUser({ ...newUser, phone_number: e.target.value })
+              }
             />
             <br />
             <label>Alternate Phone Number: </label>
             <input
               type="text"
               value={newUser.alternate_pho_no}
-              onChange={(e) => setNewUser({ ...newUser, alternate_pho_no: e.target.value })}
+              onChange={(e) =>
+                setNewUser({ ...newUser, alternate_pho_no: e.target.value })
+              }
             />
             <br />
             <label>Reporting To: </label>
