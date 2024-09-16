@@ -120,7 +120,9 @@ const Members = () => {
     setNewUser({
       name: '',
       role: '',
+      phone_number: '',
       email_id: '',
+      alternate_pho_no: '',
       reporting_to: '',
     });
   };
@@ -274,6 +276,20 @@ const Members = () => {
               type="email"
               value={newUser.email_id}
               onChange={(e) => setNewUser({ ...newUser, email_id: e.target.value })}
+            />
+            <br />
+            <label>Phone Number: </label>
+            <input
+              type="text"
+              value={newUser.phone_number}
+              onChange={(e) => setNewUser({ ...newUser, phone_number: e.target.value })}
+            />
+            <br />
+            <label>Alternate Phone Number: </label>
+            <input
+              type="text"
+              value={newUser.alternate_pho_no}
+              onChange={(e) => setNewUser({ ...newUser, alternate_pho_no: e.target.value })}
             />
             <br />
             <label>Reporting To: </label>
