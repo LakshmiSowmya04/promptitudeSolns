@@ -136,18 +136,30 @@ const Members = () => {
       setError("Password fields cannot be blank.");
       return;
     }
+
     if (newPassword === confirmPassword) {
+      console.log("Selected User ID:", selectedUser._id);
+      console.log("New Password:", newPassword);
+
       axios
-        .put(`http://localhost:5000/users/${selectedUser.user_id}/password`, {
+        .put(`http://localhost:5000/users/${selectedUser._id}/password`, {
           new_password: newPassword,
         })
         .then((response) => {
+          console.log("Password update response:", response.data);
           setPasswordModalOpen(false);
           setError("");
           alert("Password updated successfully!");
         })
         .catch((error) => {
-          console.error("Error updating password:", error);
+          console.log("Selected User ID in error block:", selectedUser.user_id);
+          if (error.response) {
+            console.error("Error response:", error.response.data); // Server error response
+          } else if (error.request) {
+            console.error("No response received:", error.request); // No response from server
+          } else {
+            console.error("Error updating password:", error.message); // Axios setup error
+          }
         });
     } else {
       setError("Passwords do not match.");
@@ -193,12 +205,12 @@ const Members = () => {
 
   const handleToggleStatus = (user) => {
     axios
-      .put(`http://localhost:5000/users/${user.user_id}/status`, {
+      .put(`http://localhost:5000/users/${user._id}/status`, {
         status: !user.status,
       })
       .then((response) => {
         const updatedTeam = team.map((u) =>
-          u.user_id === user.user_id ? { ...u, status: !u.status } : u
+          u._id === user._id ? { ...u, status: !u.status } : u
         );
         setTeam(updatedTeam);
       })
